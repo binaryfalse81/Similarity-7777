@@ -1,7 +1,8 @@
 #include <iostream>
 using namespace std;
 
-const int MAX_LENGHTH_POINT = 60;
+const int MAX_LENGTH_POINT = 60;
+const int ZERO_LENGTH_POINT = 0;
 
 class SimilarityChecker
 {
@@ -10,22 +11,51 @@ public:
     {
         int size1 = a.size();
         int size2 = b.size();
-        int small = (size1 > size2) ? size2 : size1;
-        int large = (size1 > size2) ? size1 : size2;
-        int gap = large - small;
+        int small = GetSmallLength(size1, size2);
+        int large = GetLargeLength(size1, size2);
+        int gap = GetLengthGap(large, small);
         
-        if (size1 == size2)
+        if (IsSameLength(size1, size2))
         {
-            return MAX_LENGHTH_POINT;
+            return MAX_LENGTH_POINT;
         }
 
-        if (small * 2 <= large)
+        if (IsDouble(large, small))
         {
-            return 0;
+            return ZERO_LENGTH_POINT;
         }
 
-        double subPoint = (1 - ((double)gap / (double)small)) * MAX_LENGHTH_POINT;
+        return GetSubPoint(gap, small);
+    }
 
+    int GetSmallLength(int size1, int size2)
+    {
+        return (size1 > size2) ? size2 : size1;;
+    }
+
+    int GetLargeLength(int size1, int size2)
+    {
+        return (size1 > size2) ? size1 : size2;;
+    }
+
+    bool IsSameLength(int size1, int size2)
+    {
+        return (size1 == size2);
+    }
+
+    int GetLengthGap(int large, int small)
+    {
+        return large - small;
+    }
+
+    bool IsDouble(int large, int small)
+    {
+        return (small * 2 <= large);
+    }
+
+    int GetSubPoint(int gap, int small)
+    {
+        double subPoint = (1 - ((double)gap / (double)small)) * MAX_LENGTH_POINT;
         return (int)subPoint;
     }
 };

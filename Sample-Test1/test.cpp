@@ -14,7 +14,7 @@ public:
 };
 
 TEST_F(SimFixture, SIM_CHECK_001) {
-    CheckLength("ABCDE", "ABCDE", MAX_LENGHTH_POINT);
+    CheckLength("ABCDE", "ABCDE", MAX_LENGTH_POINT);
 } 
 
 TEST_F(SimFixture, SIM_CHECK_002) {
