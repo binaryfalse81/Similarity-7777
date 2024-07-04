@@ -1,8 +1,26 @@
 #include "pch.h"
 #include "../Project1/sim.cpp"
 
-TEST(SIM_CHECK, SIM_CHECK_001) {
+class SimFixture : public testing::Test
+{
+public:
     SimilarityChecker sc;
-    int point = sc.check("ABCDE", "ABCDE");
-    EXPECT_EQ(point, 100);
+
+    void CheckLength(string a, string b, int expected)
+    {
+        int point = sc.CheckStrLength(a, b);
+        EXPECT_EQ(point, expected); 
+    }
+};
+
+TEST_F(SimFixture, SIM_CHECK_001) {
+    CheckLength("ABCDE", "ABCDE", MAX_LENGHTH_POINT);
+} 
+
+TEST_F(SimFixture, SIM_CHECK_002) {
+    CheckLength("ABCD", "ABCDE", 45);
+}
+
+TEST_F(SimFixture, SIM_CHECK_003) {
+    CheckLength("ABCD", "ABCDEFJKUKKKKK", 0);
 }
