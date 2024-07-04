@@ -1,9 +1,6 @@
 #include <iostream>
 using namespace std;
 
-const int MAX_LENGTH_POINT = 60;
-const int ZERO_LENGTH_POINT = 0;
-
 class SimilarityChecker
 {
 public:
@@ -27,6 +24,9 @@ public:
 
         return GetSubPoint(gap, small);
     }
+private:
+    const int MAX_LENGTH_POINT = 60;
+    const int ZERO_LENGTH_POINT = 0;
 
     int GetSmallLength(int size1, int size2)
     {
